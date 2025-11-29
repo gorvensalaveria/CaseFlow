@@ -8,7 +8,7 @@ This project also includes an AI-enhancement roadmap, such as AI-generated case 
 
 ---
 
-**Features**
+  **Features**
 
 **Core Features (MVP)**
 
@@ -24,57 +24,60 @@ This project also includes an AI-enhancement roadmap, such as AI-generated case 
 
 - REST API (Node.js + Express)
 
-PostgreSQL database (Dockerized)
+- PostgreSQL database (Dockerized)
 
-Modern UI using Next.js + TailwindCSS
+- Modern UI using Next.js + TailwindCSS
 
 **Planned (Phase 2)**
 
-Add Case / Client UI
+- Add Case / Client UI
 
-Editing & updating cases
+- Editing & updating cases
 
-Document module
+- Document module
 
-Authentication & roles
+- Authentication & roles
 
 **AI Roadmap (Phase 3)**
 
-AI Case Summary
+- AI Case Summary
 
-AI Email Draft Assistant
+- AI Email Draft Assistant
 
-AI Document Checklist
+- AI Document Checklist
 
-AI Case Risk Assessment
+- AI Case Risk Assessment
 
-AI Smart Search
+- AI Smart Search
 
-AI Workflow Suggestions
+- AI Workflow Suggestions
 
-**🛠 Tech Stack**
+---
+
+  **🛠 Tech Stack**
+  
 **Frontend**
 
-Next.js 14
+- Next.js 14
 
-React
+- React
 
-TypeScript
+- TypeScript
 
-TailwindCSS
+- TailwindCSS
 
 **Backend**
 
-Node.js
+- Node.js
 
-Express.js
+- Express.js
 
-REST API
+- REST API
 
-CORS
+- CORS
 
 **Database**
 
-PostgreSQL
+- PostgreSQL
 
-Docker
+- Docker
