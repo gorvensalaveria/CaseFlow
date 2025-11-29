@@ -5,7 +5,7 @@ CaseFlow is a modern full-stack case management system designed for migration an
 Built using Next.js, React, TypeScript, TailwindCSS, Node.js, Express, PostgreSQL, and Docker, CaseFlow demonstrates my ability to build real business-oriented systems with clean architecture, scalable APIs, and responsive UI.
 
 This project also includes an AI-enhancement roadmap, such as AI-generated case summaries, document checklists, email templates, and workflow automation.
-
+---
 **Features**
 
 **Core Features (MVP)**
