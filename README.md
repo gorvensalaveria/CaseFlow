@@ -6,26 +6,27 @@ Built using Next.js, React, TypeScript, TailwindCSS, Node.js, Express, PostgreSQ
 
 This project also includes an AI-enhancement roadmap, such as AI-generated case summaries, document checklists, email templates, and workflow automation.
 
-🚀 Features
-Core Features (MVP)
+**Features**
 
-Dashboard with case statistics
+**Core Features (MVP)**
 
-Case list with filtering and sorting
+- Dashboard with case statistics
 
-Case detail page with client info
+- Case list with filtering and sorting
 
-Activity timeline per case
+- Case detail page with client info
 
-Status tracking (New, In Progress, Waiting, Completed)
+- Activity timeline per case
 
-REST API (Node.js + Express)
+- Status tracking (New, In Progress, Waiting, Completed)
+
+- REST API (Node.js + Express)
 
 PostgreSQL database (Dockerized)
 
 Modern UI using Next.js + TailwindCSS
 
-Planned (Phase 2)
+**Planned (Phase 2)**
 
 Add Case / Client UI
 
@@ -35,7 +36,7 @@ Document module
 
 Authentication & roles
 
-AI Roadmap (Phase 3)
+**AI Roadmap (Phase 3)**
 
 AI Case Summary
 
@@ -49,8 +50,8 @@ AI Smart Search
 
 AI Workflow Suggestions
 
-🛠 Tech Stack
-Frontend
+**🛠 Tech Stack**
+**Frontend**
 
 Next.js 14
 
@@ -60,7 +61,7 @@ TypeScript
 
 TailwindCSS
 
-Backend
+**Backend**
 
 Node.js
 
@@ -70,7 +71,7 @@ REST API
 
 CORS
 
-Database
+**Database**
 
 PostgreSQL
 
