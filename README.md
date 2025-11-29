@@ -54,7 +54,7 @@ This project also includes an AI-enhancement roadmap, such as AI-generated case 
 
 ---
 
-  ** Tech Stack**
+  **Tech Stack**
   
 **Frontend**
 
