@@ -1,36 +1,55 @@
-# CaseFlow — User Workflows
+---
 
-## 1. Case Lifecycle
+#  **File 3 — `/docs/workflow.md`**  
+### **CaseFlow — Workflow Diagram (User & System Flow)**
 
-New enquiry → Client created → Case created → Case updated with activities →
-Status moves from:
-NEW → IN_PROGRESS → WAITING → COMPLETED
+```md
+# CaseFlow — Workflow Diagrams
 
-Each case has:
+This document outlines how users interact with the CaseFlow system and how cases progress through their lifecycle.
 
-- A linked client
-- A type (e.g. Student Visa, Work Visa, Visitor Visa)
-- A status and timestamps
-- Many activities over time
+---
+
+## 1. Case Lifecycle Workflow
+
+New enquiry  
+→ Client record created  
+→ Case created and assigned  
+→ Activities logged (calls, emails, updates)  
+→ Status changes throughout lifecycle:  
+ NEW → IN_PROGRESS → WAITING → COMPLETED
 
 ---
 
 ## 2. Daily Consultant Workflow
 
-1. Open CaseFlow at `/` (dashboard)
-2. Review summary of active cases and statuses
-3. Navigate to `/cases` to see list of cases
-4. Click a case to open `/cases/[id]`
-5. Review case info, client details, and history
-6. (Future) Add a new activity (note/update) to the case
-7. (Future) Update case status when progress changes
+1. Open dashboard (`/`) and review case statistics
+2. Go to `/cases` to see all cases
+3. Click a case to open `/cases/[id]`
+4. Review case details:
+   - Case info
+   - Client info
+   - Activity timeline
+5. (Future) Add new activity to the case
+6. (Future) Update case status
+7. Return to case list or dashboard
 
 ---
 
-## 3. New Case Creation (Future)
+## 3. Case Creation Workflow (Future Phase)
 
-1. Navigate to `/cases` and click "New Case"
-2. Select or create client
-3. Enter case title, type, and initial status
-4. Save → case appears in case list and dashboard stats
-5. Consultant continues to log activities and update status
+1. User clicks “New Case”
+2. Select or create a client
+3. Fill case title, type, and initial status
+4. Save → case appears in list and dashboard
+5. User logs updates via activity timeline
+
+---
+
+## 4. Activity Addition Workflow (Future Phase)
+
+1. User opens a case detail page
+2. Types a message in “Add activity” field
+3. Clicks “Submit”
+4. Backend stores activity and updates case timestamp
+5. Activity appears at top of timeline
