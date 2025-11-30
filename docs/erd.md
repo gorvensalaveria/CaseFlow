@@ -1,38 +1,78 @@
-# CaseFlow — Database ERD
+# CaseFlow — Entity Relationship Diagram (ERD)
 
-## Entities
+This document describes the database structure used by CaseFlow, including the entities (Client, Case, Activity) and their relationships.
+
+---
+
+## 1. Text ERD (Developer-Friendly)
 
 ### Client
 
-- id (PK, int)
-- full_name (text)
-- email (text)
-- phone (text, nullable)
-- created_at (timestamp, default now)
-- updated_at (timestamp, on update)
+- id (PK)
+- full_name
+- email
+- phone
+- created_at
+- updated_at
 
 ### Case
 
-- id (PK, int)
-- title (text)
-- type (text) // e.g. "Student Visa", "Work Visa"
-- status (enum) // NEW, IN_PROGRESS, WAITING, COMPLETED
+- id (PK)
+- title
+- type
+- status
 - client_id (FK → Client.id)
-- created_at (timestamp, default now)
-- updated_at (timestamp, on update)
+- created_at
+- updated_at
 
 ### Activity
 
-- id (PK, int)
+- id (PK)
 - case_id (FK → Case.id)
-- message (text)
-- created_at (timestamp, default now)
+- message
+- created_at
 
-## Relationships
+### Relationships
 
-- One Client has many Cases (1 → ∞)
-- One Case has many Activities (1 → ∞)
+- One **Client** can have many **Cases**
+- One **Case** can have many **Activities**
 
-ASCII representation:
-
+ASCII Diagram:
 Client (1) ───────── (∞) Case (1) ───────── (∞) Activity
+
+---
+
+## 2. Visual ERD (Mermaid Diagram)
+
+```mermaid
+erDiagram
+
+    Client {
+        int id PK
+        string full_name
+        string email
+        string phone
+        datetime created_at
+        datetime updated_at
+    }
+
+    Case {
+        int id PK
+        string title
+        string type
+        string status
+        int client_id FK
+        datetime created_at
+        datetime updated_at
+    }
+
+    Activity {
+        int id PK
+        int case_id FK
+        string message
+        datetime created_at
+    }
+
+    Client ||--o{ Case : has
+    Case ||--o{ Activity : contains
+```
