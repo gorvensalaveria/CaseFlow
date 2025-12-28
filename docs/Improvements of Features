@@ -1,0 +1,21 @@
+1) Add navigation UX (small but important)
+
+Back to Cases link/button
+
+Optional: show breadcrumb like Cases / Case #1
+
+2) Loading + Error UI polish
+
+You probably already have basic loading/error states, but later you can upgrade to:
+
+skeleton loading
+
+nicer error banner + retry button
+
+3) Convert timestamps
+
+Right now it shows a readable date/time (good). Later you can improve to:
+
+“2 hours ago”
+
+consistent timezone formatting
