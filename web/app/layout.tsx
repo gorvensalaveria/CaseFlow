@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "Gorven | Full-stack Developer",
-  description: "Portfolio of Gorven Salaveria, full-stack web developer.",
+  description: "CaseFlow Project of Gorven G. Salaveria",
 };
 
 export default function RootLayout({

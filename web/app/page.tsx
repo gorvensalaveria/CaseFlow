@@ -193,7 +193,7 @@ export default function CaseflowDashboardPage() {
                     >
                       <td className="py-2 pr-4 align-middle">
                         <Link
-                          href={`/caseflow/cases/${c.id}`}
+                          href={`/cases/${c.id}`}
                           className="block hover:text-brand-blue transition"
                         >
                           <div className="font-medium text-slate-50">

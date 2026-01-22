@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: caseflow-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: caseflow
+      POSTGRES_PASSWORD: caseflow
+      POSTGRES_DB: caseflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - caseflow_db_data:/var/lib/postgresql/data
+
+volumes:
+  caseflow_db_data:

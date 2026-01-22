@@ -93,6 +93,35 @@ app.get("/api/cases/:id", async (req, res) => {
   }
 });
 
+app.post("/api/cases/:id/activities", async (req, res) => {
+  try {
+    const caseId = Number(req.params.id);
+    const { message } = req.body;
+
+    if (!caseId || Number.isNaN(caseId)) {
+      return res.status(400).json({ message: "Invalid case id"});
+    }
+
+    if (!message || typeof message !== "string" || message.trim().length === 0) {
+      return res.status(400).json({ message: "Activity message is required"})
+    }
+
+    const insert = await pool.query(
+      `INSERT INTO activities (case_id, message)
+       VALUES ($1, $2)
+       RETURNING id, case_id, message, created_at
+      `,
+      [caseId, message.trim()]
+    );
+
+    return res.status(201).json(insert.rows[0]);
+    
+  } catch (err) {
+    console.error("Error creating activity:", err);
+    return res.status(500).json({error: "Internal server error"});
+  }
+});
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`API server listening on http://localhost:${PORT}`);
