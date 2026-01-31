@@ -68,7 +68,9 @@ export default function CaseflowDashboardPage() {
       try {
         setLoading(true);
         setError(null);
+        
 
+        
         const res = await fetch(`${API_BASE_URL}/api/cases`);
 
         if (!res.ok) {
