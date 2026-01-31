@@ -17,35 +17,44 @@ enum CaseStatus {
 }
 
 model Client {
-  id         Int      @id @default(autoincrement())
-  fullName   String
-  email      String
-  phone      String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  fullName  String   @map("full_name")
+  email     String
+  phone     String?
 
-  cases      Case[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  cases     Case[]
+
+  @@map("clients")
 }
 
 model Case {
-  id          Int        @id @default(autoincrement())
-  title       String
-  status      CaseStatus @default(NEW)
-  type        String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id        Int        @id @default(autoincrement())
+  title     String
+  status    CaseStatus @default(NEW)
+  type      String
 
-  clientId    Int
-  client      Client     @relation(fields: [clientId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
 
-  activities  Activity[]
+  clientId  Int    @map("client_id")
+  client    Client @relation(fields: [clientId], references: [id])
+
+  activities Activity[]
+
+  @@map("cases")
 }
 
 model Activity {
   id        Int      @id @default(autoincrement())
-  caseId    Int
+  caseId    Int      @map("case_id")
   message   String
-  createdAt DateTime @default(now())
+
+  createdAt DateTime @default(now()) @map("created_at")
 
   case      Case     @relation(fields: [caseId], references: [id])
+
+  @@map("activities")
 }
