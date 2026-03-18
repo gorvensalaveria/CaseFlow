@@ -1,7 +1,7 @@
 # CaseFlow
 ## System Design Document (SDD)
 
-Version: 1.0  
+Version: 1.1  
 Author: Gorven G. Salaveria  
 Last Updated: March 2026  
 Status: Draft  
