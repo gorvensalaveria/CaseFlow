@@ -1,29 +1,35 @@
 # CaseFlow
-## Migration Case Management CRM
+## AI-Enhanced Migration Case Management CRM
 ### Business Requirements Document (BRD)
 
-Version: 4.0  
+Version: 4.1  
 Author: Gorven G. Salaveria  
-Date: 2026  
-Document Status: Draft  
+Last Updated: March 2026  
+Status: Draft  
 
 ---
 
 # 1. Executive Summary
 
-This document defines the business requirements for **CaseFlow**, a web-based Migration Case Management CRM designed to support migration agencies in managing clients, visa matters, documents, billing, and communication workflows.
+CaseFlow is a lightweight, web-based Migration Case Management CRM designed to help migration agencies manage clients, visa matters, checklist items, and documents in a more organized and efficient way.
 
-CaseFlow is designed as a **multi-tenant SaaS platform**, allowing multiple migration agencies to operate independently while sharing the same infrastructure. Each agency’s data is logically isolated to ensure privacy and security.
+The system is designed as a simple but realistic SaaS-style product that centralizes the core parts of migration case handling. It provides admins with a structured way to manage case progress while also giving clients a secure portal where they can view updates and upload required files.
 
-The platform provides role-based access for agency staff and a secure portal for clients to upload documents, track visa progress, and communicate with migration agents.
+In addition to its core CRM features, CaseFlow includes an AI-assisted layer to improve productivity and reduce manual work. These AI features are intended to support, not replace, staff decision-making. Initial AI capabilities include matter summarization, document data extraction assistance, and message drafting support.
 
-The primary goal of CaseFlow is to centralize case management operations while improving efficiency, transparency, and regulatory compliance.
+For the MVP, CaseFlow focuses on the most important operational features: client management, matter tracking, checklist/task management, document handling, client self-service, and practical AI assistance.
+
+The goal is to create a product that is simple, useful, and realistic to build, while also demonstrating strong product thinking, system design, full-stack development, and applied AI integration.
 
 ---
 
 # 2. Product Vision
 
-CaseFlow aims to provide migration agencies with a centralized platform to manage the entire lifecycle of visa applications—from client intake to final decision—while ensuring compliance, operational efficiency, and transparency for both staff and clients.
+The vision for CaseFlow is to provide a focused migration case management platform that helps agencies keep track of client records, visa matters, required tasks, supporting documents, and AI-assisted operational workflows in one system.
+
+Rather than trying to do everything at once, the MVP is designed to deliver a smaller but complete product experience that is practical, believable, and polished enough to demonstrate both product and engineering capability.
+
+The AI layer is intended to make the system more useful by helping admins summarize cases, identify missing information, and draft client-facing updates more efficiently.
 
 ---
 
@@ -31,359 +37,389 @@ CaseFlow aims to provide migration agencies with a centralized platform to manag
 
 | Objective | Description | Success Indicator |
 |-----------|-------------|------------------|
-| Centralized Client Management | Store all client information in a single system | Reduced duplicate records |
-| Workflow Automation | Generate tasks and checklists based on visa templates | Majority of matters created via templates |
-| Compliance Tracking | Maintain auditable records of activities | All actions logged and timestamped |
-| Client Transparency | Allow clients to track matter progress | Increased client self-service usage |
-| Financial Visibility | Manage invoices and payments within the system | Clear billing records and payment tracking |
+| Centralized Client Management | Keep client and matter information in one place | Reduced duplicate records and better organization |
+| Matter Visibility | Allow admins and clients to clearly track matter progress | Better visibility into stages, checklist items, and document status |
+| Workflow Simplicity | Organize tasks and checklist items in a structured way | Matters consistently tracked through checklist-based workflows |
+| Document Management | Provide a secure and organized way to manage uploaded documents | Faster document collection and better traceability |
+| Client Transparency | Allow clients to view progress and upload required files through a portal | Increased client self-service and reduced manual follow-up |
+| AI-Assisted Productivity | Use AI to reduce repetitive admin work and improve clarity | Faster case review, improved summaries, and faster draft communication |
 
 ---
 
 # 4. Scope
 
-## In Scope (MVP)
+## 4.1 In Scope (MVP)
 
-- User authentication and role-based access control
+- Public product homepage with no login required
+- User authentication
+- Role-based access control for Admin and Client
 - Client profile management
-- Visa matter management
-- Task and workflow tracking
+- Matter management
+- Task and checklist tracking
 - Document upload and verification
-- Client portal for document submission
-- Billing and invoice tracking
-- Reporting dashboards
-- Audit logging
+- Client portal for viewing progress and uploading requested files
+- Dashboard summaries for admins
+- AI matter summary generation
+- AI client message drafting
+- AI-assisted document data extraction support
 
-## Out of Scope (Future Phases)
+## 4.2 Out of Scope (Future Phases)
 
-- Employer/Sponsor portal
-- Accounting integrations (Xero, QuickBooks)
-- Calendar integrations
+- Billing and invoice management
+- Payment gateway integration
+- Employer / Sponsor portal
+- E-signature workflows
 - Advanced workflow automation
-- Mobile applications
+- Advanced analytics and reporting
+- Multiple internal staff roles beyond Admin
+- Mobile application
+- Real-time collaboration
+- Full production-grade multi-tenant tenant administration
+- Advanced AI workflows such as autonomous case handling
 
 ---
 
-# 5. Stakeholders and Roles
+# 5. Stakeholders & Roles
 
-| Role | Description |
-|-----|-------------|
-| Platform Admin | Manages platform-level operations, tenants, and global settings |
-| Agency Admin | Manages agency users, configuration, and workflow templates |
-| Registered Migration Agent (RMA) | Oversees visa matters and performs approvals |
-| Case Officer | Handles operational tasks and case preparation |
-| Finance Officer | Manages billing, invoices, and payment tracking |
-| Client | Portal user who uploads documents and tracks matter progress |
+| Role | Responsibilities |
+|------|------------------|
+| Admin | Manages clients, matters, checklist items, documents, and AI-assisted workflow actions |
+| Client | Views matter progress and uploads requested documents through the portal |
 
 ---
 
 # 6. System Overview
 
-CaseFlow operates as a **multi-tenant SaaS platform** where each migration agency functions as an independent tenant with isolated users and data.
+CaseFlow is a lightweight SaaS-style application with three main product areas.
 
-The system provides two main interfaces.
+## 6.1 Public Product Homepage
 
-### Staff Portal
+The public homepage explains the product, its purpose, and its core features. This page does not require login so employers, recruiters, or evaluators can understand the project without friction.
 
-Used by migration agency staff to manage:
+## 6.2 Admin Portal
 
-- clients
+The admin portal is used to manage:
+
+- client records
 - visa matters
-- workflows and tasks
-- documents
-- billing
-- internal communication
+- checklist items and tasks
+- uploaded documents
+- basic dashboard summaries
+- AI-generated matter summaries
+- AI-assisted message drafts
+- AI-assisted document data extraction results
 
-### Client Portal
+## 6.3 Client Portal
 
-Used by clients to:
+The client portal allows users to:
 
-- view visa application progress
+- view their own matter progress
+- view required checklist items
 - upload requested documents
-- communicate with staff
-- view invoices and make payments
 
 ---
 
 # 7. Core Modules
 
-The system is composed of the following modules:
-
-1. Authentication & Security  
-2. Dashboard & Operational Overview  
-3. Client Management  
-4. Matter (Visa Case) Management  
-5. Task & Workflow Automation  
-6. Document Management & E-Signatures  
-7. Messaging & Communication  
-8. Client Portal  
-9. Billing & Payments  
-10. Reporting & Analytics  
-11. Administration  
+1. Public Product Homepage
+2. Authentication
+3. Dashboard
+4. Clients
+5. Matters
+6. Tasks / Checklist
+7. Documents
+8. Client Portal
+9. AI Assistance
 
 ---
 
 # 8. Functional Requirements
 
-## 8.1 Authentication & Security
+## 8.1 Public Product Homepage
 
-The system must provide secure authentication and access control.
+The system must provide a public-facing homepage that explains the product and allows visitors to understand the purpose of CaseFlow without signing in.
 
-Features include:
+### Features
+- product overview
+- feature highlights
+- architecture or product summary
+- demo entry point or login link
 
-- email and password authentication
-- optional multi-factor authentication (MFA)
-- password reset and account recovery
-- session management
-- role-based access control (RBAC)
-
-Business Rules:
-
-- accounts lock after multiple failed login attempts
-- passwords must meet minimum complexity requirements
-- sensitive data must be encrypted in storage and transit
+### Business Rules
+- the homepage must be publicly accessible
+- the homepage must not expose protected client or admin data
 
 ---
 
-## 8.2 Dashboard
+## 8.2 Authentication
 
-The dashboard provides users with an overview of operational activity.
+The system must provide secure login for Admin and Client users.
 
-Widgets may include:
+### Features
+- email and password login
+- session-based access control
+- logout functionality
 
-- tasks due today
-- overdue tasks
-- upcoming deadlines
-- case pipeline overview
-- recent messages
-
-Users must only see information relevant to their role and assigned matters.
+### Business Rules
+- users can only access features allowed by their role
+- clients can only view their own records
+- admin users can access all records within the demo environment
 
 ---
 
-## 8.3 Clients Module
+## 8.3 Dashboard
 
-The system must allow staff to manage client profiles.
+The dashboard gives admins a quick overview of the system.
 
-Features include:
+### Widgets may include
+- total clients
+- active matters
+- pending checklist items
+- recently uploaded documents
+- AI summary shortcuts
 
-- create and edit client records
+### Business Rules
+- dashboard data should reflect the latest saved records
+- only Admin users can access the dashboard
+
+---
+
+## 8.4 Clients Module
+
+The system must allow Admin users to create and manage client records.
+
+### Features
+- create client
+- edit client
+- view client details
 - store personal and contact information
-- manage dependants
-- upload engagement letters
-- record conflict checks
 
-Validation rules must ensure:
-
-- required identifiers are stored securely
-- duplicate client records are minimized
+### Validation Rules
+- required fields must be completed
+- duplicate client records should be minimized
 
 ---
 
-## 8.4 Matters Module
+## 8.5 Matters Module
 
-Matters represent visa applications associated with a client.
+A matter represents a visa application or case linked to a client.
 
-Features include:
+### Features
+- create matter
+- update matter stage
+- assign matter to a client
+- track key dates or progress
 
-- create matters by visa subclass
-- track stages of application progress
-- assign staff members
-- track key dates and deadlines
-- generate tasks and checklists from templates
-
-Each matter must be linked to a client.
-
----
-
-## 8.5 Tasks and Workflow Automation
-
-The system must support task management and workflow automation.
-
-Features include:
-
-- automatic task generation from templates
-- manual task creation
-- task assignments
-- due date tracking
-- status updates
-
-Tasks may be linked to specific matters.
+### Business Rules
+- each matter must belong to one client
+- a client may have multiple matters
 
 ---
 
-## 8.6 Document Management
+## 8.6 Tasks / Checklist Module
 
-The system must support document lifecycle management.
+The system must support checklist-style tracking for each matter.
 
-Features include:
+### Features
+- create checklist items
+- update checklist item status
+- track required and completed items
+- associate checklist items with a matter
 
-- document uploads
-- document preview
-- document verification
-- document rejection and replacement
-- document version tracking
-
-Uploaded files must pass validation and virus scanning before verification.
-
----
-
-## 8.7 Client Portal
-
-Clients must have access to a secure portal.
-
-Portal capabilities include:
-
-- viewing matter progress
-- uploading requested documents
-- viewing invoices
-- sending secure messages
-
-Clients must only see information related to their own matters.
+### Business Rules
+- each checklist item must belong to a matter
+- checklist progress should be visible to both Admin and Client where appropriate
 
 ---
 
-## 8.8 Billing and Payments
+## 8.7 Documents Module
 
-The system must support billing workflows.
+The system must support document uploads and review.
 
-Features include:
+### Features
+- upload document
+- view uploaded document metadata
+- mark document as verified or rejected
+- associate uploaded files with a matter or checklist item
 
-- quote generation
-- invoice creation
-- payment tracking
-- receipt generation
-
-Payment gateways such as **Stripe** may be integrated.
-
----
-
-## 8.9 Messaging
-
-The platform must support secure communication between staff and clients.
-
-Features include:
-
-- threaded conversations
-- message notifications
-- file attachments
-
-Messages may be linked to specific matters.
+### Business Rules
+- documents must be linked to a client matter
+- clients can upload only for their own matters
+- admins can review and update document status
 
 ---
 
-## 8.10 Reporting
+## 8.8 Client Portal
 
-The system must provide reporting capabilities.
+The client portal provides a simplified view of the client’s own case.
 
-Examples include:
+### Features
+- view matter progress
+- view checklist items
+- upload requested documents
 
-- case pipeline reports
-- overdue tasks
-- revenue summaries
-- workload distribution
+### Business Rules
+- clients must only see their own data
+- clients must not be able to edit admin-managed records outside allowed uploads
 
-Reports must support export formats such as CSV.
+---
+
+## 8.9 AI Assistance
+
+The system must provide practical AI-assisted features that support admin productivity.
+
+### 8.9.1 AI Matter Summary
+
+The system should allow an Admin to generate a short summary of a matter based on available case data.
+
+#### Inputs may include
+- client profile details
+- matter stage
+- checklist item status
+- uploaded document metadata
+- notes or recent updates
+
+#### Outputs may include
+- short case summary
+- outstanding requirements
+- suggested next action
+
+#### Business Rules
+- AI summaries are assistive only and must be reviewable by the Admin
+- AI output must not directly overwrite structured system data
+- AI output should be clearly labeled as generated content
+
+---
+
+### 8.9.2 AI Message Drafting
+
+The system should allow an Admin to generate a draft message to a client based on the current status of a matter.
+
+#### Inputs may include
+- matter stage
+- missing checklist items
+- document review results
+- recent updates
+
+#### Outputs may include
+- a draft client message
+- a follow-up reminder
+- a progress update message
+
+#### Business Rules
+- generated messages must be editable before use
+- generated messages must not be sent automatically in the MVP
+- AI output must be clearly labeled as a draft
+
+---
+
+### 8.9.3 AI-Assisted Document Data Extraction
+
+The system should support AI-assisted extraction of useful information from uploaded documents.
+
+#### Example extracted fields may include
+- full name
+- passport number
+- date of birth
+- document type
+- issue date
+- expiry date
+
+#### Business Rules
+- extracted data must be reviewed by the Admin before use
+- extracted data must not automatically overwrite stored client fields
+- extraction errors must be treated as non-blocking suggestions
 
 ---
 
 # 9. Data Model Overview
 
-Key entities include:
-
 | Entity | Description |
-|------|-------------|
-| Tenant | Migration agency using the system |
-| User | Staff member belonging to a tenant |
-| Client | Visa applicant |
-| Dependant | Family member linked to a client |
-| Matter | Visa application case |
-| Task | Workflow task |
-| Document | Uploaded file |
-| Invoice | Billing record |
-| Payment | Payment transaction |
-| Message | Communication record |
-| AuditLog | System activity log |
+|--------|-------------|
+| User | System user with Admin or Client role |
+| Client | Person receiving migration services |
+| Matter | Visa case linked to a client |
+| ChecklistItem | Required or tracked item linked to a matter |
+| Document | File uploaded for a matter or checklist item |
+| AISummary | Generated matter summary linked to a matter |
+| AIMessageDraft | Generated message draft linked to a matter or client |
+| AIExtractionResult | Structured AI extraction result linked to a document |
 
 ---
 
-# 10. Integrations
+# 10. Security Considerations
 
-External services may include:
-
-| Integration | Purpose |
-|-------------|--------|
-| Stripe | Payment processing |
-| DocuSign | Electronic signatures |
-| Email Services (SES / SendGrid) | Notification delivery |
-
----
-
-# 11. Security and Compliance
-
-Security measures include:
+The system should implement the following basic security controls:
 
 - role-based access control
-- multi-factor authentication
-- encrypted data storage
-- tenant data isolation
-- audit logging
-
-All sensitive actions must be recorded in audit logs.
-
-Audit logs should record:
-
-- user
-- action
-- affected entity
-- timestamp
-- originating IP address
+- secure password handling
+- protected routes for authenticated users
+- client-level access restrictions
+- document access limited by role and ownership
+- AI outputs accessible only to authorized users
+- AI-generated results must remain reviewable and non-destructive
 
 ---
 
-# 12. Non-Functional Requirements
+# 11. Non-Functional Requirements
 
 | Category | Requirement |
-|--------|-------------|
-| Performance | Page loads under 3 seconds |
-| Availability | 99.9% uptime target |
-| Security | Encrypted data storage and secure access |
-| Scalability | Multi-tenant architecture |
-| Accessibility | Compliance with accessibility standards |
+|----------|-------------|
+| Performance | Standard pages should load within 3 seconds |
+| Security | Authentication and protected route access must be enforced |
+| Scalability | The design should support future multi-tenant expansion |
+| Usability | The interface should be clear and easy to navigate |
+| Accessibility | The UI should follow accessible design practices where possible |
+| AI Safety | AI-generated content must be reviewable, editable, and clearly labeled |
 
 ---
 
-# 13. Example Workflow
+# 12. Example Workflow
 
-Typical visa application workflow:
+A typical case flow in the MVP may look like this:
 
-1. Client record created  
-2. Matter created from template  
-3. Tasks and checklist generated  
-4. Client uploads required documents  
-5. Staff verifies documents  
-6. Application lodged  
-7. Decision recorded  
-8. Invoice generated and paid  
+1. Admin creates a client
+2. Admin creates a matter for that client
+3. Admin adds checklist items
+4. Client logs in and views their matter
+5. Client uploads requested documents
+6. Admin reviews uploaded documents
+7. Admin generates an AI matter summary
+8. Admin generates a draft client update if needed
+9. Admin updates checklist or matter progress
 
 ---
 
-# 14. Assumptions
+# 13. Assumptions
 
-- Each migration agency operates as a tenant.
-- Clients may have multiple visa matters.
-- Documents require version tracking.
-- Payment processing will be handled by an external gateway.
+- the MVP uses only two roles: Admin and Client
+- each matter belongs to one client
+- clients may have more than one matter
+- documents are associated with matters or checklist items
+- the public homepage is separate from the authenticated app area
+- AI features are assistive and review-based, not autonomous
+- AI outputs are used to support workflows, not replace human judgment
+
+---
+
+# 14. Dependencies
+
+- modern web frontend framework
+- backend API service
+- relational database
+- file storage for uploaded documents
+- AI model or AI API provider for summarization, drafting, and extraction
 
 ---
 
 # 15. Risks
 
-Potential risks include:
-
-- integration failures with third-party services
-- complex role permission management
-- document storage costs
-- compliance with privacy regulations
+- scope creep if too many AI features are added too early
+- unclear boundaries between admin judgment and AI suggestions
+- document handling complexity
+- poor UX if AI features are added without clear workflow value
+- extraction inaccuracies from uploaded documents
+- unfinished product if AI is prioritized before the core CRM is stable
 
 ---
 
@@ -391,7 +427,15 @@ Potential risks include:
 
 Possible future improvements include:
 
-- employer portal
-- automated workflow rules
-- analytics dashboards
-- mobile applications
+- billing and invoice management
+- online payments
+- e-signature support
+- additional internal staff roles
+- advanced reporting
+- workflow automation
+- employer/sponsor portal
+- production-ready multi-tenant tenant administration
+- AI-powered semantic search
+- AI-powered case recommendation support
+- AI-assisted checklist suggestion by visa type
+- AI-powered internal case assistant
