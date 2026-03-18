@@ -2,7 +2,7 @@
 ## AI-Enhanced Migration Case Management CRM
 ### Business Requirements Document (BRD)
 
-Version: 4.2  
+Version: 4.1  
 Author: Gorven G. Salaveria  
 Last Updated: March 2026  
 Status: Draft  
