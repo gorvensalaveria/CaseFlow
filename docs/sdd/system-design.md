@@ -76,8 +76,6 @@ The MVP uses a modular monolith approach:
 - one relational database
 - one AI integration layer inside the backend
 
-This is the most practical choice for a portfolio project because it keeps the system simple, easier to develop, and easier to explain, while still being structured like a real product.
-
 ---
 
 # 4. High-Level Components
