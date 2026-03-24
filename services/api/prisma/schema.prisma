@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  admin
+  client
+}
+
+enum MatterStage {
+  new
+  document_collection
+  in_review
+  completed
+}
+
+enum ChecklistItemStatus {
+  pending
+  in_progress
+  completed
+  verified
+}
+
+enum DocumentStatus {
+  uploaded
+  verified
+  rejected
+}
+
+enum AIMessageType {
+  progress_update
+  reminder
+  follow_up
+}
+
+model User {
+  id                  String               @id @default(uuid())
+  role                UserRole
+  email               String               @unique
+  passwordHash        String               @map("password_hash")
+  clientId            String?              @unique @map("client_id")
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
+
+  client              Client?              @relation(fields: [clientId], references: [id])
+  uploadedDocuments   Document[]           @relation("UploadedDocuments")
+  generatedSummaries  AISummary[]          @relation("GeneratedSummaries")
+  generatedDrafts     AIMessageDraft[]     @relation("GeneratedDrafts")
+  reviewedExtractions AIExtractionResult[] @relation("ReviewedExtractions")
+
+  @@map("users")
+}
+
+model Client {
+  id          String    @id @default(uuid())
+  firstName   String    @map("first_name")
+  lastName    String    @map("last_name")
+  email       String?
+  phone       String?
+  dateOfBirth DateTime? @db.Date @map("date_of_birth")
+  nationality String?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user    User?
+  matters Matter[]
+
+  @@map("clients")
+}
+
+model Matter {
+  id              String           @id @default(uuid())
+  clientId        String           @map("client_id")
+  title           String
+  visaType        String           @map("visa_type")
+  stage           MatterStage
+  dueDate         DateTime?        @db.Date @map("due_date")
+  notes           String?
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+
+  client          Client           @relation(fields: [clientId], references: [id])
+  checklistItems  ChecklistItem[]
+  documents       Document[]
+  aiSummaries     AISummary[]
+  aiMessageDrafts AIMessageDraft[]
+
+  @@index([clientId])
+  @@index([stage])
+  @@map("matters")
+}
+
+model ChecklistItem {
+  id        String              @id @default(uuid())
+  matterId  String              @map("matter_id")
+  title     String
+  status    ChecklistItemStatus
+  required  Boolean             @default(true)
+  dueDate   DateTime?           @db.Date @map("due_date")
+  notes     String?
+  createdAt DateTime            @default(now()) @map("created_at")
+  updatedAt DateTime            @updatedAt @map("updated_at")
+
+  matter    Matter              @relation(fields: [matterId], references: [id])
+  documents Document[]
+
+  @@index([matterId])
+  @@index([status])
+  @@map("checklist_items")
+}
+
+model Document {
+  id               String             @id @default(uuid())
+  matterId         String             @map("matter_id")
+  checklistItemId  String?            @map("checklist_item_id")
+  uploadedByUserId String             @map("uploaded_by_user_id")
+  fileName         String             @map("file_name")
+  fileUrl          String             @map("file_url")
+  mimeType         String             @map("mime_type")
+  status           DocumentStatus
+  uploadedAt       DateTime           @default(now()) @map("uploaded_at")
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+
+  matter           Matter             @relation(fields: [matterId], references: [id])
+  checklistItem    ChecklistItem?     @relation(fields: [checklistItemId], references: [id])
+  uploadedByUser   User               @relation("UploadedDocuments", fields: [uploadedByUserId], references: [id])
+  extractionResults AIExtractionResult[]
+
+  @@index([matterId])
+  @@index([checklistItemId])
+  @@index([uploadedByUserId])
+  @@index([status])
+  @@map("documents")
+}
+
+model AISummary {
+  id                  String   @id @default(uuid())
+  matterId            String   @map("matter_id")
+  generatedByUserId   String   @map("generated_by_user_id")
+  summaryText         String   @map("summary_text")
+  suggestedNextAction String?  @map("suggested_next_action")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  matter          Matter @relation(fields: [matterId], references: [id])
+  generatedByUser User   @relation("GeneratedSummaries", fields: [generatedByUserId], references: [id])
+
+  @@index([matterId])
+  @@index([generatedByUserId])
+  @@map("ai_summaries")
+}
+
+model AIMessageDraft {
+  id                String        @id @default(uuid())
+  matterId          String        @map("matter_id")
+  generatedByUserId String        @map("generated_by_user_id")
+  messageType       AIMessageType @map("message_type")
+  draftText         String        @map("draft_text")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  matter          Matter @relation(fields: [matterId], references: [id])
+  generatedByUser User   @relation("GeneratedDrafts", fields: [generatedByUserId], references: [id])
+
+  @@index([matterId])
+  @@index([generatedByUserId])
+  @@map("ai_message_drafts")
+}
+
+model AIExtractionResult {
+  id               String   @id @default(uuid())
+  documentId       String   @map("document_id")
+  reviewedByUserId String?  @map("reviewed_by_user_id")
+  extractedData    Json     @map("extracted_data")
+  isReviewed       Boolean  @default(false) @map("is_reviewed")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  document       Document @relation(fields: [documentId], references: [id])
+  reviewedByUser User?    @relation("ReviewedExtractions", fields: [reviewedByUserId], references: [id])
+
+  @@index([documentId])
+  @@index([reviewedByUserId])
+  @@map("ai_extraction_results")
+}
