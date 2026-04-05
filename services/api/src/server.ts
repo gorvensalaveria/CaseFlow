@@ -1,0 +1,13 @@
+import { env } from './config/env';
+import { prisma } from './lib/prisma';
+import { app } from './app';
+
+const startServer = async () => {
+  await prisma.$connect();
+
+  app.listen(env.port, () => {
+    console.log(`CaseFlow API listening on http://localhost:${env.port}`);
+  });
+};
+
+void startServer();

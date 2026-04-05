@@ -45,10 +45,10 @@ Administration
 CaseFlow follows a modern full-stack SaaS architecture.
 
 Frontend
-- React / Next.js
+- React / Vite
 
 Backend
-- Node.js (NestJS)
+- Node.js / Express
 
 Database
 - PostgreSQL
@@ -57,6 +57,19 @@ Infrastructure
 - Cloud-based deployment
 
 The system is designed as a **multi-tenant platform**, where each migration agency operates independently while sharing the same infrastructure.
+
+---
+
+# Current Repo Setup
+
+CaseFlow is now structured as a simple monorepo:
+
+- `apps/web` for the React frontend
+- `services/api` for the Node.js + Express backend
+- `services/api/prisma` for the Prisma schema and migrations
+- `docs` for product and architecture documentation
+
+This keeps the stack lighter for MVP development while still aligning with the portfolio goal.
 
 ---
 

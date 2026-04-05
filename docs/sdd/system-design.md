@@ -49,8 +49,8 @@ CaseFlow follows a modern full-stack web architecture built around a monorepo.
 
 ## Tech Stack
 
-- **Frontend:** Next.js
-- **Backend:** NestJS
+- **Frontend:** React + Vite
+- **Backend:** Node.js + Express
 - **Database:** PostgreSQL
 - **Architecture Style:** Monorepo
 - **File Storage:** Cloud object storage or a local development storage abstraction
@@ -95,7 +95,7 @@ Responsibilities:
 
 ## 4.2 Web Application (`apps/web`)
 
-The Next.js application handles the frontend for:
+The React application handles the frontend for:
 
 - public homepage
 - admin portal
@@ -114,7 +114,7 @@ Responsibilities:
 
 ## 4.3 API Service (`services/api`)
 
-The NestJS API contains the main application logic.
+The Express API contains the main application logic.
 
 Responsibilities:
 
@@ -611,11 +611,11 @@ The MVP deployment can be simple and realistic.
 
 ## 12.1 Frontend
 
-- Next.js app deployed to Vercel or equivalent
+- React app deployed to Vercel, Netlify, or equivalent static hosting
 
 ## 12.2 Backend
 
-- NestJS API deployed to Railway, Render, Fly.io, or a similar platform
+- Express API deployed to Railway, Render, Fly.io, or a similar platform
 
 ## 12.3 Database
 
